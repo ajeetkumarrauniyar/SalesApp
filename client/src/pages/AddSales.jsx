@@ -57,8 +57,20 @@ const AddSales = () => {
                   name="qty"
                 />
               </div>
-              {/* Amount input */}
+              {/* Unit Price input */}
               <div className="form-group">
+                <label htmlFor="rate" className="label">
+                  Rate (Unit Price)
+                </label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="rate"
+                  name="rate"
+                />
+              </div>
+               {/* Amount & Calculated Field */} 
+               <div className="form-group">
                 <label htmlFor="amt" className="label">
                   Amount
                 </label>
@@ -67,6 +79,7 @@ const AddSales = () => {
                   className="form-control"
                   id="amt"
                   name="amt"
+                  disabled
                 />
               </div>
               {/* Submit button */}
