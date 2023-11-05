@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
       expiresIn: "1h", // Set an expiration time
     });
 
-    res.status(200).json({ token: JWTToken });
+    res.status(200).json({ token: JWTToken , userId: user._id});
   } catch (error) {
     console.error("Error in loginUser:", error);
     res.status(500).json({ message: "Internal server error" });
