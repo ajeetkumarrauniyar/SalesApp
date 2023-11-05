@@ -80,6 +80,7 @@ const Register = () => {
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
+            {/* Display the registration header */}
             <div className="card-header">
               <h4 className="text-center">Register</h4>
             </div>
@@ -176,14 +177,14 @@ const Register = () => {
                 {/* Registration Button */}
                 <div className="text-center">
                   <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     type="button"
                     onClick={handleRegister}
                   >
                     {/* For Loading Icon  */}
                     {loading ? (
                       <span
-                        class="spinner-border spinner-border-sm me-2"
+                        className="spinner-border spinner-border-sm me-2"
                         role="status"
                         aria-hidden="true"
                       ></span>
