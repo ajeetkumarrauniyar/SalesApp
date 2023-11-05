@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import "../App.css";
 
 const AddSales = () => {
-  const [product, setProduct] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [amount, setAmount] = useState('');
+  const [product, setProduct] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [rate, setRate] = useState("");
+  const [amount, setAmount] = useState("");
 
   const handleAddSale = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/add-sales', {
+      const response = await axios.post("/add-sales", {
         product,
         quantity,
+        rate,
         amount,
       });
-      // Handle successful sale entry here
     } catch (error) {
-      // Handle sale entry error here
-      console.error('Sale entry failed:', error);
+      console.error("Sale entry failed:", error);
     }
   };
 
@@ -36,7 +36,13 @@ const AddSales = () => {
                 <label htmlFor="product" className="label">
                   Product
                 </label>
-                <select className="form-select" id="product" name="product">
+                <select
+                  className="form-select"
+                  id="product"
+                  name="product"
+                  value={product}
+                  onChange={(e) => setProduct(e.target.value)}
+                >
                   <option defaultValue>Select the product</option>
                   <option value="1">RSO 1 LT PCH</option>
                   <option value="2">KGMO 1 LT PCH</option>
@@ -54,7 +60,9 @@ const AddSales = () => {
                   type="number"
                   className="form-control"
                   id="qty"
-                  name="qty"
+                  name="quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
                 />
               </div>
               {/* Unit Price input */}
@@ -67,10 +75,12 @@ const AddSales = () => {
                   className="form-control"
                   id="rate"
                   name="rate"
+                  value={rate}
+                  onChange={(e) => setRate(e.target.value)}
                 />
               </div>
-               {/* Amount & Calculated Field */} 
-               <div className="form-group">
+              {/* Amount & Calculated Field */}
+              <div className="form-group">
                 <label htmlFor="amt" className="label">
                   Amount
                 </label>
@@ -78,13 +88,15 @@ const AddSales = () => {
                   type="number"
                   className="form-control"
                   id="amt"
-                  name="amt"
+                  name="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                   disabled
                 />
               </div>
               {/* Submit button */}
               <div className="d-flex flex-column mt-5">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" onClick={handleAddSale}>
                   Add Sale
                 </button>
               </div>

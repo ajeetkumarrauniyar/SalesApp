@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 // Defining the User schema
 const userSchema = new mongoose.Schema(
   {
-    firstName: {
+    firstname: {
       type: String,
       required: true, // FullName is a required field
     },
-    lastName: {
+    lastname: {
       type: String,
       required: true, // LastName is a required field
     },
@@ -28,4 +28,4 @@ const userSchema = new mongoose.Schema(
 );
 
 // Creating and registering  & also exporting the User model using the schema
-module.exports = mongoose.model("UserModel", userSchema); 
+module.exports = mongoose.model("UsersModel", userSchema); 

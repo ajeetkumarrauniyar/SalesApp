@@ -1,16 +1,35 @@
-// app.js
+// Importing necessary libraries and modules
+const express = require("express");
+const dotenv = require("dotenv").config();
+const dbConnect = require("./config/dbConfig");
+const cors = require("cors"); // Enable Cross-Origin Resource Sharing
 
-const express = require('express');
+// Creating an Express application
 const app = express();
-const apiRoutes = require('./routes/api');
 
-// Body parser middleware
-app.use(express.json());
+// Setting up the server port, default to 5000
+const PORT = process.env.PORT || 5000;
 
-// API routes
-app.use('/routes', apiRoutes);
+// Connecting to the database
+dbConnect();
 
-const PORT = process.env.PORT || 3000;
+// Body parsing middleware of incoming JSON requests
+app.use(express.json()); 
+
+// Setting up CORS middleware to handle cross-origin requests
+app.use(cors());
+
+// Including the models
+require("./models/usersModel"); // User Model
+require("./models/salesModel"); // Sales Model
+require("./models/productsModel"); // Products Model
+
+// Including the authorization routes (register and login)
+const authRouter = require("./routes/authRoutes");
+app.use(authRouter);
+
+
+// Starting the server and listening on the specified port
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on Port: ${PORT}`);
 });

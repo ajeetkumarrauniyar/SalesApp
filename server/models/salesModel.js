@@ -33,6 +33,4 @@ const saleSchema = new mongoose.Schema(
 );
 
 // Creating and registering  & also exporting the Sales model using the schema
-module.exports = mongoose.model("SaleModel", saleSchema);
-
-sale_date(Timestamp);
+module.exports = mongoose.model("SalesModel", saleSchema);

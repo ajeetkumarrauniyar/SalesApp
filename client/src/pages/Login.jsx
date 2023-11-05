@@ -11,10 +11,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/login", { email, password });
-      // Handle successful login and user authentication here
+      const response = await axios.post("/api/user/login", { email, password });
     } catch (error) {
-      // Handle login error here
       console.error("Login failed:", error);
     }
   };
@@ -40,6 +38,8 @@ const Login = () => {
                     className="form-control"
                     id="email"
                     placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 {/* Password input field */}
@@ -52,11 +52,13 @@ const Login = () => {
                     className="form-control"
                     id="password"
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 {/* Login button */}
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary" onClick={handleLogin}>
                     Login
                   </button>
                 </div>

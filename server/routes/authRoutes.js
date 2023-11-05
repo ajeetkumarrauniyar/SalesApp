@@ -1,11 +1,13 @@
+// Importing necessary libraries and modules
 const express = require('express');
-const router = express.Router();
-const { registerUser, loginUser } = require('../controllers/apiController.js');
+const authRouter = express.Router();
+const { registerUser, loginUser } = require('../controllers/authController');
 
-// User Registration
-router.post('/register', registerUser);
+// Defining a POST route for user registration
+authRouter.post('/api/user/register', registerUser);
 
-// Login
-router.post('/login', loginUser);
+// Defining a POST route for user login
+authRouter.post('/api/user/login', loginUser);
 
-module.exports = router;
+// Export the authentication router as "authRouter"
+module.exports = authRouter;
