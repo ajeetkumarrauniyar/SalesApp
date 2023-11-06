@@ -6,7 +6,7 @@ import axios from "axios"; // Axios library for making HTTP requests
 import { API_BASE_URL } from "../config/config";
 import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
 
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"; 
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -16,8 +16,8 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false); // State for loading icon during API calls
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); // Access the dispatch function from a Redux store
+  const navigate = useNavigate(); // Access the navigation function from a routing library
 
   // Function to handle user login
   const handleLogin = async (e) => {
@@ -44,7 +44,7 @@ const Login = () => {
         //   title: "LoggedIn Successfully",
         // });
 
-        // Saving the response in browsers's localStorage
+       // Saving the JWT token and user data in the browser's localStorage
         localStorage.setItem("JWTToken", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.userId));
 
@@ -52,7 +52,7 @@ const Login = () => {
         dispatch({ type: "LOGIN_SUCCESS", payload: response.data.userId });
         setLoading(false);
 
-        //Navigate the user to after successful Login
+        // Navigate the user to a destination after successful login
         navigate("/api/user/add-sales"); 
 
         console.log("LogIn successful:", response);
@@ -63,6 +63,8 @@ const Login = () => {
       // setPassword("");
     } catch (error) {
       setLoading(false);
+
+      // Display an error message to the user
       SweetAlert.fire({
         icon: "error",
         title: "Login Failed",

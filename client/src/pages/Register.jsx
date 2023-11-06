@@ -58,6 +58,8 @@ const Register = () => {
         setConfirmPassword("");
       } catch (error) {
         setLoading(false);
+        
+        // Display an error message to the user
         SweetAlert.fire({
           icon: "error",
           title: "Registration Failed",
