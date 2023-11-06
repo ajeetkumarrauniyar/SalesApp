@@ -14,11 +14,11 @@ function App() {
       <HeaderComponent />
       <Routes>
         {/* <Route exact path="/" element={<Dashboard />} /> */}
-        <Route exact path="/addsales" element={<AddSales />} />
-        <Route exact path="/topsales" element={<TopSales />} />
-        <Route exact path="/revenue" element={<Revenue />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/api/auth/register" element={<Register />} />
+        <Route exact path="/api/auth/login" element={<Login />} />
+        <Route exact path="/api/user/add-sales" element={<AddSales />} />
+        <Route exact path="/api/user/top-sales" element={<TopSales />} />
+        <Route exact path="/api/user/revenue" element={<Revenue />} />
       </Routes>
     </BrowserRouter >
   );

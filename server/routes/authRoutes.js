@@ -4,10 +4,10 @@ const authRouter = express.Router();
 const { registerUser, loginUser } = require('../controllers/authController');
 
 // Defining a POST route for user registration
-authRouter.post('/api/user/register', registerUser);
+authRouter.post('/api/auth/register', registerUser);
 
 // Defining a POST route for user login
-authRouter.post('/api/user/login', loginUser);
+authRouter.post('/api/auth/login', loginUser);
 
 // Export the authentication router as "authRouter"
 module.exports = authRouter;

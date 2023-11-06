@@ -1,9 +1,13 @@
 //Importing libraries and modules
 import React, { useState } from "react";
-import axios from "axios"; // Axios library for making HTTP requests
 import "../App.css";
+
+import axios from "axios"; // Axios library for making HTTP requests
 import { API_BASE_URL } from "../config/config";
 import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // Defining and initializing state variables
@@ -11,6 +15,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false); // State for loading icon during API calls
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Function to handle user login
   const handleLogin = async (e) => {
@@ -26,22 +33,34 @@ const Login = () => {
     try {
       // Making a GET request to the login API
       const response = await axios.post(
-        `${API_BASE_URL}/api/user/login`,
+        `${API_BASE_URL}/api/auth/login`,
         requestData
       );
 
       if (response) {
         setLoading(false); // Hide loading icon
-        SweetAlert.fire({
-          icon: "success",
-          title: "LoggedIn Successfully",
-        });
+        // SweetAlert.fire({
+        //   icon: "success",
+        //   title: "LoggedIn Successfully",
+        // });
+
+        // Saving the response in browsers's localStorage
+        localStorage.setItem("JWTToken", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.userId));
+
+        //Dispatching the data to the action type in Redux Tool
+        dispatch({ type: "LOGIN_SUCCESS", payload: response.data.userId });
+        setLoading(false);
+
+        //Navigate the user to after successful Login
+        navigate("/api/user/add-sales"); 
+
         console.log("LogIn successful:", response);
       }
 
       // Resetting (Clearing) the input fields
-      setEmail("");
-      setPassword("");
+      // setEmail("");
+      // setPassword("");
     } catch (error) {
       setLoading(false);
       SweetAlert.fire({

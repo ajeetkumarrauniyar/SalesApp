@@ -15,21 +15,21 @@ const HeaderComponent = () => {
           <Link className="nav-link" to="/">Dashboard</Link>
         </li> */}
         <li className="nav-item">
-          <Link className="nav-link" to="/addsales">Add Sales</Link>
+          <Link className="nav-link" to="/api/user/add-sales">Add Sales</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/topsales">Top 5 Sales</Link>
+          <Link className="nav-link" to="/api/user/top-sales">Top 5 Sales</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/revenue">Today's Total Revenue</Link>
+          <Link className="nav-link" to="/api/user/revenue">Today's Total Revenue</Link>
         </li>
         <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Login/SigUp
           </Link>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><Link className="dropdown-item" to="/login">Login</Link></li>
-            <li><Link className="dropdown-item" to="/register">Register</Link></li>
+            <li><Link className="dropdown-item" to="/api/auth/login">Login</Link></li>
+            <li><Link className="dropdown-item" to="/api/auth/register">Register</Link></li>
           </ul>
         </li>
         <li className="nav-item">

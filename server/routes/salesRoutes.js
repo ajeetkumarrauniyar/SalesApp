@@ -9,7 +9,7 @@ salesRouter.post("/api/user/add-sales", addSalesEntry);
 salesRouter.post("/api/user/top-sales", getTopSales);
 
 // Defining a GET route for total revenue
-salesRouter.get("/api/user/top-sales", getTotalRevenue);
+salesRouter.get("/api/user/revenue", getTotalRevenue);
 
 // Export the sales router as "authRouter"
 module.exports = salesRouter;
