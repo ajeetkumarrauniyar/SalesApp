@@ -38,9 +38,10 @@ const Register = () => {
       try {
         // Making a POST request to the registration API
         const response = await axios.post(
-          `${API_BASE_URL}/api/user/register`,
+          `${API_BASE_URL}/api/auth/register`,
           requestData
         );
+        console.log(requestData);
 
         if (response) {
           setLoading(false); // Hide loading icon
@@ -61,7 +62,7 @@ const Register = () => {
         setConfirmPassword("");
       } catch (error) {
         setLoading(false);
-        
+
         // Display an error message to the user
         SweetAlert.fire({
           icon: "error",

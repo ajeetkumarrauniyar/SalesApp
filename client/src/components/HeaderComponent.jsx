@@ -1,7 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import '../App.css'
+
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux"
+
 const HeaderComponent = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem('JWTToken');
+    localStorage.removeItem('user');
+    dispatch({ type: 'LOGIN_ERROR' });
+    navigate('/Login');
+  };
   return (
 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <div className="container-fluid">
@@ -18,10 +30,10 @@ const HeaderComponent = () => {
           <Link className="nav-link" to="/api/user/add-sales">Add Sales</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/api/user/top-sales">Top 5 Sales</Link>
+          <Link className="nav-link" to="/api/user/top-sales">Today's Top Sales</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/api/user/revenue">Today's Total Revenue</Link>
+          <Link className="nav-link" to="/api/user/revenue">Total Revenue</Link>
         </li>
         <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,7 +45,7 @@ const HeaderComponent = () => {
           </ul>
         </li>
         <li className="nav-item">
-          <Link className="nav-link disabled" to="#">Logout</Link>
+          <Link className="nav-link" onClick={() => logout()}>Logout</Link>
         </li>
       </ul>
       <form className="d-flex">
