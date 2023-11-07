@@ -79,7 +79,5 @@ const loginUser = async (req, res) => {
   }
 };
 
-
-
 // Exporting the registration and login function
 module.exports = { registerUser, loginUser };

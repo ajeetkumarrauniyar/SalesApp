@@ -1,7 +1,8 @@
 //Importing libraries and modules
 import React, { useState } from "react";
-import axios from "axios"; // Axios library for making HTTP requests
 import "../App.css";
+
+import axios from "axios"; // Axios library for making HTTP requests
 import { API_BASE_URL } from "../config/config";
 import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
 
@@ -43,6 +44,8 @@ const Register = () => {
 
         if (response) {
           setLoading(false); // Hide loading icon
+
+          // Display an success message to the user
           SweetAlert.fire({
             icon: "success",
             title: "User Registered Successfully",

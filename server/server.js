@@ -28,6 +28,9 @@ require("./models/productsModel"); // Products Model
 const authRouter = require("./routes/authRoutes");
 app.use(authRouter);
 
+// Including the sales routes (add sales)
+const salesRouter = require("./routes/salesRoutes");
+app.use(salesRouter);
 
 // Starting the server and listening on the specified port
 app.listen(PORT, () => {

@@ -1,6 +1,7 @@
 // Importing necessary libraries and modules
 const express = require("express");
 const salesRouter = express.Router();
+const { addSalesEntry, getTopSales, getTotalRevenue } = require ("../controllers/salesController");
 
 // Defining a POST route for adding sales
 salesRouter.post("/api/user/add-sales", addSalesEntry);
