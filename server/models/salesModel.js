@@ -14,6 +14,10 @@ const saleSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "Product", // References to the products list
     },
+    product: {
+      type: String, 
+      required: true,
+    },
     rate: {
       type: Number,
       required: "true",

@@ -24,7 +24,6 @@ const addSalesEntry = async (req, res) => {
     // Respond with a 201 status code and a JSON message for a successful sale entry
     res.status(201).json({ message: "Sale added successfully", sale: newSale });
   } catch (error) {
-    console.error("Error in addSalesEntry:", error); // Log the error message to the console
     res.status(500).json({ message: "Internal server error" }); // Respond with a 500 status code for internal server error
   }
 };

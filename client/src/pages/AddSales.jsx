@@ -5,6 +5,8 @@ import axios from "axios"; // Axios library for making HTTP requests
 import { API_BASE_URL } from "../config/config";
 import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
 
+import { products } from "./ProductsList"; // Importing productsList
+
 const AddSales = () => {
   // Defining and initializing state variables
   const [product, setProduct] = useState("");
@@ -19,12 +21,18 @@ const AddSales = () => {
     e.preventDefault(); // Prevent the default form submission
     setLoading(true); // Show loading icon
 
+    // Calculate the total amount based on the current quantity and rate
+    const calculatedAmount = quantity * rate;
+
+    // Update the state with the calculated amount
+    setAmount(calculatedAmount);
+
     // Creating a request data object
     const requestData = {
       product,
       quantity,
       rate,
-      amount,
+      amount: calculatedAmount,
     };
 
     try {
@@ -85,12 +93,12 @@ const AddSales = () => {
                     onChange={(e) => setProduct(e.target.value)}
                   >
                     {/* Products option */}
-                    <option defaultValue>Select the product</option>
-                    <option value="1">RSO 1 LT PCH</option>
-                    <option value="2">KGMO 1 LT PCH</option>
-                    <option value="3">RBO 1 LT PCH</option>
-                    <option value="4">Sunflower Oil 1 LT PCH</option>
-                    <option value="5">Coconut Oil 1 LT PCH</option>
+                    <option value="">Select the product</option>
+                    {products.map((product, index) => (
+                      <option key={product.id} value={product.name}>
+                        {product.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 {/* Quantity input */}
@@ -105,7 +113,12 @@ const AddSales = () => {
                     id="qty"
                     name="quantity"
                     value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
+                    onChange={(e) => {
+                      setQuantity(e.target.value);
+                      // Calculate the amount based on the quantity and rate
+                      const calculatedAmount = e.target.value * rate;
+                      setAmount(calculatedAmount);
+                    }}
                   />
                 </div>
                 {/* Unit Price input */}
@@ -120,7 +133,12 @@ const AddSales = () => {
                     id="rate"
                     name="rate"
                     value={rate}
-                    onChange={(e) => setRate(e.target.value)}
+                    onChange={(e) => {
+                      setRate(e.target.value);
+                      // Calculate the amount based on the rate and quantity
+                      const calculatedAmount = e.target.value * quantity;
+                      setAmount(calculatedAmount);
+                    }}
                   />
                 </div>
                 {/* Amount & Calculated Field */}
@@ -134,7 +152,7 @@ const AddSales = () => {
                     id="amt"
                     name="amount"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    // onChange={(e) => setAmount(e.target.value)}
                     disabled
                   />
                 </div>
