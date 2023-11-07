@@ -13,14 +13,14 @@ function App() {
     <BrowserRouter>
       <HeaderComponent />
       <Routes>
-        {/* <Route exact path="/" element={<Dashboard />} /> */}
+        <Route exact path="/" element={<Login/>} />
         <Route exact path="/api/auth/register" element={<Register />} />
         <Route exact path="/api/auth/login" element={<Login />} />
         <Route exact path="/api/user/add-sales" element={<AddSales />} />
         <Route exact path="/api/user/top-sales" element={<TopSales />} />
         <Route exact path="/api/user/revenue" element={<Revenue />} />
       </Routes>
-    </BrowserRouter >
+    </BrowserRouter > 
   );
 }
 
