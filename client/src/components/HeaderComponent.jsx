@@ -9,7 +9,7 @@ const HeaderComponent = () => {
   const dispatch = useDispatch(); // Access the dispatch function from a Redux store
   const navigate = useNavigate(); // Access the navigation function from a routing library
 
-  const user = useSelector(state => state.userReducer)  // Retrieve user-related data from the Redux store if necessary
+  const user = useSelector((state) => state.userReducer); // Retrieve user-related data from the Redux store if necessary
 
   // Function to handle user logout
   const handleLogout = () => {
@@ -45,7 +45,7 @@ const HeaderComponent = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {/* <li className="nav-item">
           <NavLink className="nav-link" to="/">Dashboard</Link>
-        </li> */}
+           </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/api/user/add-sales">
                 Add Sales
@@ -61,37 +61,48 @@ const HeaderComponent = () => {
                 Total Revenue
               </NavLink>
             </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Login/SigUp
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/api/auth/login">
-                    Login
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/api/auth/register">
-                    Register
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            {user ? <li className="nav-item">
-              <NavLink className="nav-link" to="/api/auth/login" onClick={() => handleLogout()} >
-                Logout
-              </NavLink>
-            </li> : ''}
+
+            {/* Conditionally render the "Login/SignUp" dropdown based on user status */}
+            {!user || !user.userId ? (
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link dropdown-toggle"
+                  to="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Login/SigUp
+                </NavLink>
+
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <NavLink className="dropdown-item" to="/api/auth/login">
+                      Login
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="/api/auth/register">
+                      Register
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              // Render Logout item when the user is logged in
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/api/auth/login"
+                  onClick={() => handleLogout()}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            )}
           </ul>
-          <form className="d-flex">
+          {/* <form className="d-flex">
             <input
               className="form-control me-2"
               type="search"
@@ -101,7 +112,7 @@ const HeaderComponent = () => {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
     </nav>

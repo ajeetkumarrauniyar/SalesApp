@@ -7,7 +7,7 @@ const { addSalesEntry, getTopSales, getTotalRevenue } = require ("../controllers
 salesRouter.post("/api/user/add-sales", addSalesEntry);
 
 // Defining a GET route for top 5 sales of today
-salesRouter.post("/api/user/top-sales", getTopSales);
+salesRouter.get("/api/user/top-sales", getTopSales);
 
 // Defining a GET route for total revenue
 salesRouter.get("/api/user/revenue", getTotalRevenue);

@@ -28,10 +28,42 @@ const addSalesEntry = async (req, res) => {
   }
 };
 
-
 // Top 5 Sales of the day (today)
 const getTopSales = async (req, res) => {
-  // Implement logic to retrieve top sales of the day
+  try {
+    // Get the current date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Setting hours, minutes, seconds, and milliseconds to 0 for comparison
+
+    // Aggregate sales data to find the top 5 sales of the day
+    const topSales = await SalesModel.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: today }, // Filter sales created today
+        },
+      },
+      {
+        $group: {
+          _id: "$product",
+          salesId: { $first: "$_id" }, 
+          product: { $first: "$product"},
+          totalAmount: { $sum: "$amount" },
+          quantity: { $sum: "$quantity" }, 
+        },
+      },
+      {
+        $sort: { totalAmount: -1 }, // Sort in descending order by totalAmount
+      },
+      {
+        $limit: 5, // Limit to the top 5 sales
+      },
+    ]);
+
+    res.status(200).json({ topSales });
+  } catch (error) {
+    console.error("Error in getTopSales:", error);
+    res.status(500).json({ message: "Internal server error at getTopSales" });
+  }
 };
 
 // Total Revenue

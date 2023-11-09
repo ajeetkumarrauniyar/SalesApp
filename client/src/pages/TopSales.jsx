@@ -1,19 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+//Importing libraries and modules
+import React, { useState, useEffect } from "react";
 import "../App.css";
 
+import axios from "axios"; // Axios library for making HTTP requests
+import { API_BASE_URL } from "../config/config";
+import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
+
 const TopSales = () => {
+  // Defining and initializing state variables
   const [topSales, setTopSales] = useState([]);
 
   useEffect(() => {
-    // Fetch top sales data from the backend when the component mounts
     async function fetchTopSales() {
       try {
-        const response = await axios.get('/api/top-sales');
-        setTopSales(response.data);
+        const response = await axios.get(`${API_BASE_URL}/api/user/top-sales`);
+        setTopSales(response.data.topSales);
+        console.log("Top Sales Data", response.data.topSales);
+
       } catch (error) {
-        // Handle error when fetching top sales
-        console.error('Failed to fetch top sales:', error);
+        console.error("Failed to fetch top sales:", error);
+        SweetAlert.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed to fetch top sales. Please try again.",
+        });
       }
     }
 
@@ -27,7 +37,7 @@ const TopSales = () => {
           <h4 className="text-center">Top 5 Sales</h4>
           <table className="table table-dark table-striped table-hover align-middle">
             <thead>
-              <tr className="align-middle"> 
+              <tr className="align-middle">
                 <th scope="col">#</th>
                 <th scope="col">Sales ID:</th>
                 <th scope="col">Product Name</th>
@@ -36,41 +46,15 @@ const TopSales = () => {
               </tr>
             </thead>
             <tbody className="table-group-divider align-middle text-center">
-              <tr>
-                <th scope="row">1</th>
-                <td>MS0001</td>
-                <td>RSO 1 LT PCH</td>
-                <td>10</td>
-                <td>17500</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>MS0002</td>
-                <td>KGMO 1 LT PCH</td>
-                <td>4</td>
-                <td>7720</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>MS0003</td>
-                <td>RBO 1 LT PCH</td>
-                <td>2</td>
-                <td>5500</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>MS0004</td>
-                <td>Sunflower Oil 1 LT PCH</td>
-                <td>1</td>
-                <td>4000</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>MS0005</td>
-                <td>Coconut Oil 1 LT PCH</td>
-                <td>2</td>
-                <td>5900</td>
-              </tr>
+              {topSales.map((sale, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{sale.salesId}</td>
+                  <td>{sale.product}</td>
+                  <td>{sale.quantity}</td>
+                  <td>{sale.totalAmount}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
