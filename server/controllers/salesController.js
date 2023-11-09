@@ -68,8 +68,27 @@ const getTopSales = async (req, res) => {
 
 // Total Revenue
 const getTotalRevenue = async (req, res) => {
-  // Implement logic to calculate total revenue
+  try {
+    // Aggregate sales data to calculate the total revenue of all time
+    const totalRevenue = await SalesModel.aggregate([
+      {
+        $group: {
+          _id: null, // Group all documents together
+          totalAmount: { $sum: "$amount" }, // Calculate the sum of the 'amount' field
+        },
+      },
+    ]);
+
+    // Extract the total revenue from the result
+    const result = totalRevenue.length > 0 ? totalRevenue[0].totalAmount : 0;
+
+    res.status(200).json({ totalRevenue: result });
+  } catch (error) {
+    console.error("Error in getTotalRevenue:", error);
+    res.status(500).json({ message: "Internal server error at getTotalRevenue" });
+  }
 };
+
 
 // Exporting the Add Sales, Top 5 sales of the day, and Total Revenue controllers
 module.exports = { addSalesEntry, getTopSales, getTotalRevenue };

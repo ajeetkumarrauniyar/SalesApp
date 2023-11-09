@@ -3,13 +3,13 @@ import React from "react";
 import "../App.css";
 
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const HeaderComponent = () => {
-  const dispatch = useDispatch(); // Access the dispatch function from a Redux store
-  const navigate = useNavigate(); // Access the navigation function from a routing library
+  const dispatch = useDispatch(); // Accessing the dispatch function from a Redux store
+  const navigate = useNavigate(); // Accessing the navigation function from a routing library
 
-  const user = useSelector((state) => state.userReducer); // Retrieve user-related data from the Redux store if necessary
+  const user = localStorage.getItem("user"); // Retrieving user-related data from the Redux store if necessary
 
   // Function to handle user logout
   const handleLogout = () => {
@@ -42,10 +42,13 @@ const HeaderComponent = () => {
           className="collapse navbar-collapse ms-3"
           id="navbarSupportedContent"
         >
+          {/* Navigation links */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {/* <li className="nav-item">
-          <NavLink className="nav-link" to="/">Dashboard</Link>
-           </li> */}
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/api/auth/login">
+                Dashboard
+              </NavLink>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/api/user/add-sales">
                 Add Sales
@@ -57,13 +60,13 @@ const HeaderComponent = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/api/user/revenue">
+              <NavLink className="nav-link" to="/api/user/total-revenue">
                 Total Revenue
               </NavLink>
             </li>
 
-            {/* Conditionally render the "Login/SignUp" dropdown based on user status */}
-            {!user || !user.userId ? (
+            {/* Conditionally rendering the "Login/SignUp" dropdown based on user status */}
+            {!user ? (
               <li className="nav-item dropdown">
                 <NavLink
                   className="nav-link dropdown-toggle"
@@ -76,6 +79,7 @@ const HeaderComponent = () => {
                   Login/SigUp
                 </NavLink>
 
+                {/* Dropdown menu for login/signup */}
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <NavLink className="dropdown-item" to="/api/auth/login">
@@ -90,7 +94,7 @@ const HeaderComponent = () => {
                 </ul>
               </li>
             ) : (
-              // Render Logout item when the user is logged in
+              // Rendering Logout item when the user is logged in
               <li className="nav-item">
                 <NavLink
                   className="nav-link"

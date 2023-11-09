@@ -80,7 +80,7 @@ const Register = () => {
     }
   };
 
-  // Return the registration form JSX
+  // Returning the registration form JSX
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">

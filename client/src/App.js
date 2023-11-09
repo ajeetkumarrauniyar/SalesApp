@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/api/auth/login" element={<Login />} />
         <Route exact path="/api/user/add-sales" element={<AddSales />} />
         <Route exact path="/api/user/top-sales" element={<TopSales />} />
-        <Route exact path="/api/user/revenue" element={<Revenue />} />
+        <Route exact path="/api/user/total-revenue" element={<Revenue />} />
       </Routes>
     </BrowserRouter > 
   );

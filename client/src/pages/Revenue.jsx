@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../App.css";
 
-// This component displays today's revenue in a card format
 const Revenue = () => {
-  const [revenue, setRevenue] = useState([]);
+  const [totalRevenue, setTotalRevenue] = useState(0);
 
   useEffect(() => {
     // Fetch revenue data from the backend when the component mounts
     async function fetchRevenue() {
       try {
-        const response = await axios.get('/revenue');
-        setRevenue(response.data);
+        const response = await axios.get("/api/user/total-revenue");
+        setTotalRevenue(response.data.totalRevenue);
       } catch (error) {
         // Handle error when fetching revenue
-        console.error('Failed to fetch revenue:', error);
+        console.error("Failed to fetch revenue:", error);
       }
     }
 
@@ -31,7 +30,8 @@ const Revenue = () => {
             <div className="card-body">
               {/* Display revenue amount with currency symbol */}
               <p className="d-flex justify-content-center align-items-center display-4 fw-bold">
-                <span className="pe-3">&#8377;</span>25220
+                <span className="pe-3">&#8377;</span>
+                {totalRevenue}
               </p>
             </div>
           </div>
