@@ -22,13 +22,12 @@ app.use(cors());
 // Including the models
 require("./models/usersModel"); // User Model
 require("./models/salesModel"); // Sales Model
-require("./models/productsModel"); // Products Model
 
 // Including the authorization routes (register and login)
 const authRouter = require("./routes/authRoutes");
 app.use(authRouter);
 
-// Including the sales routes (add sales)
+// Including the sales routes (add sales, top5sales, total-revenue)
 const salesRouter = require("./routes/salesRoutes");
 app.use(salesRouter);
 

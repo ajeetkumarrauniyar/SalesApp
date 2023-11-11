@@ -6,6 +6,8 @@ import axios from "axios"; // Axios library for making HTTP requests
 import { API_BASE_URL } from "../config/config";
 import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
 
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
   // Defining and initializing state variables
   const [firstname, setFirstName] = useState("");
@@ -16,6 +18,8 @@ const Register = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true); // State to track password matching
 
   const [loading, setLoading] = useState(false); // State for loading icon during API calls
+
+  const navigate = useNavigate(); // Access the navigation function from a routing library
 
   // Function to handle user registration
   const handleRegister = async (e) => {
@@ -60,6 +64,9 @@ const Register = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+
+        // Navigate the user to a login after successful registration
+        navigate("/api/auth/login");
       } catch (error) {
         setLoading(false);
 

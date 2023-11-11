@@ -16,7 +16,7 @@ const AddSales = () => {
   const [amount, setAmount] = useState("");
 
   const [loading, setLoading] = useState(false); // State for loading icon during API calls
-
+  
   // Function to handle add sale
   const handleAddSale = async (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -37,10 +37,18 @@ const AddSales = () => {
     };
 
     try {
+      const JWTToken = localStorage.getItem('token'); // Retrieve the token
+
       // Making a POST request to the registration API
       const response = await axios.post(
         `${API_BASE_URL}/api/user/add-sales`,
-        requestData
+        requestData,
+
+        {
+          headers: {
+            Authorization: `Bearer ${JWTToken}`, 
+          },
+        }
       );
       if (response) {
         setLoading(false); // Hide loading icon
@@ -62,7 +70,7 @@ const AddSales = () => {
       // Display an error message to the user
       SweetAlert.fire({
         icon: "error",
-        title: "Registration Failed",
+        title: "Can't able to add sale now!",
       });
       console.error("Sale entry failed:", error);
       console.log("Error during sale adding on the frontend API call", error);

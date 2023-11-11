@@ -44,11 +44,11 @@ const HeaderComponent = () => {
         >
           {/* Navigation links */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/api/auth/login">
                 Dashboard
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/api/user/add-sales">
                 Add Sales

@@ -10,10 +10,6 @@ const saleSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User", // Reference to the user who made the sale
     },
-    productId: {
-      type: ObjectId,
-      ref: "Product", // References to the products list
-    },
     product: {
       type: String, 
       required: true,

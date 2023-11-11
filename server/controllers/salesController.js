@@ -3,6 +3,7 @@ const SalesModel = require("../models/salesModel");
 
 // Add Sales Controller
 const addSalesEntry = async (req, res) => {
+  localStorage.setItem('token', JWT_SECRET);
   try {
     // Destructure the product, quantity, and rate from the request body
     const { product, quantity, rate } = req.body;
@@ -78,13 +79,14 @@ const getTotalRevenue = async (req, res) => {
         },
       },
     ]);
+    console.log('Request received at getTotalRevenue controller');
 
     // Extract the total revenue from the result
     const result = totalRevenue.length > 0 ? totalRevenue[0].totalAmount : 0;
 
     res.status(200).json({ totalRevenue: result });
   } catch (error) {
-    console.error("Error in getTotalRevenue:", error);
+    console.error('Error in getTotalRevenue controller:', error);
     res.status(500).json({ message: "Internal server error at getTotalRevenue" });
   }
 };

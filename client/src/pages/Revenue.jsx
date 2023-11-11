@@ -1,7 +1,10 @@
+//Importing libraries and modules
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "../App.css";
 
+import axios from "axios"; // Axios library for making HTTP requests
+import { API_BASE_URL } from "../config/config";
+import SweetAlert from "sweetalert2"; // SweetAlert for displaying alerts
 const Revenue = () => {
   const [totalRevenue, setTotalRevenue] = useState(0);
 
@@ -9,11 +12,18 @@ const Revenue = () => {
     // Fetch revenue data from the backend when the component mounts
     async function fetchRevenue() {
       try {
-        const response = await axios.get("/api/user/total-revenue");
+        // Make a GET request to the total-revenue endpoint
+        const response = await axios.get(
+          `${API_BASE_URL}/api/user/total-revenue`
+        );
+
         setTotalRevenue(response.data.totalRevenue);
       } catch (error) {
-        // Handle error when fetching revenue
-        console.error("Failed to fetch revenue:", error);
+        SweetAlert.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed to fetch total revenue. Please try again.",
+        });
       }
     }
 
