@@ -3,7 +3,6 @@ const SalesModel = require("../models/salesModel");
 
 // Add Sales Controller
 const addSalesEntry = async (req, res) => {
-  localStorage.setItem('token', JWT_SECRET);
   try {
     // Destructure the product, quantity, and rate from the request body
     const { product, quantity, rate } = req.body;
@@ -25,7 +24,8 @@ const addSalesEntry = async (req, res) => {
     // Respond with a 201 status code and a JSON message for a successful sale entry
     res.status(201).json({ message: "Sale added successfully", sale: newSale });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" }); // Respond with a 500 status code for internal server error
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" }); 
   }
 };
 

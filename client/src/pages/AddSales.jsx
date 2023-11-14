@@ -17,6 +17,12 @@ const AddSales = () => {
 
   const [loading, setLoading] = useState(false); // State for loading icon during API calls
   
+  const CONFIG = {
+    headers: {
+      'Content-Type': 'Application/json',
+      'authorization': 'Bearer ' + localStorage.getItem('JWTToken')
+    }
+  }
   // Function to handle add sale
   const handleAddSale = async (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -33,22 +39,17 @@ const AddSales = () => {
       product,
       quantity,
       rate,
-      amount: calculatedAmount,
+      // amount: calculatedAmount,
     };
 
     try {
-      const JWTToken = localStorage.getItem('token'); // Retrieve the token
-
+      // const JWTToken = localStorage.getItem('token'); // Retrieve the token
+      
       // Making a POST request to the registration API
       const response = await axios.post(
         `${API_BASE_URL}/api/user/add-sales`,
         requestData,
-
-        {
-          headers: {
-            Authorization: `Bearer ${JWTToken}`, 
-          },
-        }
+        CONFIG
       );
       if (response) {
         setLoading(false); // Hide loading icon
