@@ -1,3 +1,0 @@
-# Add Sales Entry Comments Refactor
-
-#improve register JSX axios POST route 

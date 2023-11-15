@@ -39,10 +39,10 @@ const Login = () => {
 
       if (response) {
         setLoading(false); // Hide loading icon
-        // SweetAlert.fire({
-        //   icon: "success",
-        //   title: "LoggedIn Successfully",
-        // });
+        SweetAlert.fire({
+          icon: "success",
+          title: "LoggedIn Successfully",
+        });
 
        // Saving the JWT token and user data in the browser's localStorage
         localStorage.setItem("JWTToken", response.data.token);
