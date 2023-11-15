@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 // import Dashboard from "./pages/Dashboard"; // Dashboard page
 import AddSales from "./pages/AddSales"; // AddSales page
 import TopSales from "./pages/TopSales"; // TopSales page
@@ -13,14 +13,15 @@ function App() {
     <BrowserRouter>
       <HeaderComponent />
       <Routes>
-        <Route exact path="/" element={<Login/>} />
+        {/* Redirect to the login route when visiting the root path */}
+        <Route path="/" element={<Navigate to="/api/auth/login" />} />
         <Route exact path="/api/auth/register" element={<Register />} />
         <Route exact path="/api/auth/login" element={<Login />} />
         <Route exact path="/api/user/add-sales" element={<AddSales />} />
         <Route exact path="/api/user/top-sales" element={<TopSales />} />
         <Route exact path="/api/user/total-revenue" element={<Revenue />} />
       </Routes>
-    </BrowserRouter > 
+    </BrowserRouter>
   );
 }
 
